@@ -9,7 +9,7 @@ import { ClientError } from '../common/exceptions/client.error';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('register')
+  @Post()
   @ApiOperation({})
   @ApiCreatedResponse({})
   async registerUser(
