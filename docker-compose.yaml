@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  mongo_db:
+    image: mongo:latest
+    container_name: mongo_db
+    restart: on-failure
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: youapp
