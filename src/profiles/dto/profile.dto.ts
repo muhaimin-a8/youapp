@@ -1,53 +1,74 @@
-import { IsOptional, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateProfileDto {
+  userId: string;
+
+  @ApiProperty()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   readonly profileImage: string;
 
+  @ApiProperty()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   readonly displayName: string;
 
+  @ApiProperty()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   readonly gender: string;
 
+  @ApiProperty()
   @IsString()
-  @IsOptional()
+  @IsNotEmpty()
   readonly birthday: string;
 
-  @IsString()
-  @IsOptional()
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
   readonly weight: number;
 
-  @IsString()
-  @IsOptional()
-  readonly heigth: number;
+  @ApiProperty()
+  @IsNumber()
+  @IsNotEmpty()
+  readonly height: number;
 }
 
 export class UpdateProfileDto {
+  userId: string;
+
+  @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   readonly profileImage: string;
 
+  @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   readonly displayName: string;
 
+  @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   readonly gender: string;
 
-  @IsString()
+  @ApiPropertyOptional()
+  @IsDateString()
   @IsOptional()
-  readonly birthday: string;
+  readonly birthday: Date;
 
-  @IsString()
+  @ApiPropertyOptional()
   @IsOptional()
   readonly weight: number;
 
-  @IsString()
+  @ApiPropertyOptional()
   @IsOptional()
   readonly heigth: number;
 }

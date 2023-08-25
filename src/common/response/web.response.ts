@@ -5,18 +5,7 @@ import { HttpStatus } from '@nestjs/common';
 export class WebResponse {
   static sendResponseMessage({ res, code, message, data }) {
     res.status(code);
-    if (message !== undefined) {
-      res.json({
-        statusCode: code,
-        message: message,
-      });
-    } else {
-      res.json({
-        statusCode: code,
-        data: data,
-      });
-    }
-    return res;
+    return res.json({ code, message, data });
   }
 
   static sendErrorMessage(res: Response, e: Error) {

@@ -5,13 +5,13 @@ import { WebResponse } from '../common/response/web.response';
 import { Response } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Auth')
+@ApiTags('User Auth')
 @Controller('api/users/auth')
 export default class AuthController {
   constructor(private readonly authService: AuthService) {}
   //LOGIN USER
   @Post()
-  @ApiOperation({})
+  @ApiOperation({ description: 'login user' })
   async loginUser(@Res() res: Response, @Body() loginDto: LoginUserDto) {
     try {
       const data = await this.authService.loginWithUsernameOREmail(loginDto);

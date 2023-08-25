@@ -30,9 +30,16 @@ export class AuthService {
     if (!match) {
       throw new AuthenticationError('invalid credentials');
     }
+    const refreshToken = new this.refreshTokenModel(
+      await this.createRefreshToken(user._id.toString()),
+    );
+
+    // save refresh token to database
+    await refreshToken.save();
+
     return {
       accessToken: await this.createAccessToken(user._id.toString()),
-      refreshToken: await this.createRefreshToken(user._id.toString()),
+      refreshToken: refreshToken.refreshToken,
     };
   }
 
@@ -42,7 +49,7 @@ export class AuthService {
 
   private async createRefreshToken(userId: string) {
     const refreshToken = new this.refreshTokenModel({
-      refreshToken: this.jwtService.sign({ userId }),
+      refreshToken: this.jwtService.sign({ userId }, {}),
     });
 
     await refreshToken.save();

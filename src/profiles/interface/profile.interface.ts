@@ -1,4 +1,5 @@
 export interface Profile extends Document {
+  userId: string;
   imageProfile: string;
   displayName: string;
   gender: string;

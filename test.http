@@ -20,4 +20,4 @@ Accept: application/json
 
 ### GET PROFILE
 GET http://localhost:3000/api/users/profiles
-Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU4NmI1Yjk1MTEwNzExZGM4ODkzMmQiLCJpYXQiOjE2OTI5NTM0NTUsImV4cCI6MTY5Mjk1MzUxNX0.cM0wOgtZbIc-kUuBF1VvW48Llacg4pnVflJ3euTqRbo"
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU4NmI1Yjk1MTEwNzExZGM4ODkzMmQiLCJpYXQiOjE2OTI5NjMwMTUsImV4cCI6MjI5Mjk2MzAxNX0.WDPj5C9qt67ZX0lxLf-Qvnj0gbKTjBPRL3gWXWYmRiw"
