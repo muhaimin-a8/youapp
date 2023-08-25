@@ -12,7 +12,7 @@ import {
 import { ProfileService } from './profile.service';
 import { CreateProfileDto, UpdateProfileDto } from './dto/profile.dto';
 import { WebResponse } from '../common/response/web.response';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
