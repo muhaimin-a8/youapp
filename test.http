@@ -3,7 +3,21 @@ Content-Type: application/json
 Accept: application/json
 
 {
-   "username" :"johnsdvdoxedf1sw23d",
-   "email":"johfndofes@dsdas.cscs",
-  "password" : "sasasasasasa"
+   "username" :"john123",
+   "email":"joh123@example.com",
+  "password" : "supersecret"
 }
+
+### LOGIN
+POST http://localhost:3000/api/users/auth
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email" : "joh123@example.com",
+  "password" : "supersecret"
+}
+
+### GET PROFILE
+GET http://localhost:3000/api/users/profiles
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU4NmI1Yjk1MTEwNzExZGM4ODkzMmQiLCJpYXQiOjE2OTI5NTM0NTUsImV4cCI6MTY5Mjk1MzUxNX0.cM0wOgtZbIc-kUuBF1VvW48Llacg4pnVflJ3euTqRbo"

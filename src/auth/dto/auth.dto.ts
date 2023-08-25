@@ -1,31 +1,32 @@
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
   IsString,
   MaxLength,
   MinLength,
+  ValidateIf,
 } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
 
-export class RegisterUserDto {
-  @ApiProperty({
-    description: 'new username and must be unique',
+export class LoginUserDto {
+  @ApiPropertyOptional({
+    description: 'your username',
     minLength: 5,
     maxLength: 255,
-    required: true,
   })
+  @ValidateIf((o) => o.email === undefined)
   @IsString()
-  @IsNotEmpty()
   @MinLength(5)
   @MaxLength(255)
+  @IsNotEmpty()
   readonly username: string;
 
-  @ApiProperty({
-    description: 'new email and must be unique',
+  @ApiPropertyOptional({
+    description: 'or your email',
     minLength: 5,
     maxLength: 255,
-    required: true,
   })
+  @ValidateIf((o) => o.username === undefined)
   @IsString()
   @IsNotEmpty()
   @MinLength(5)
@@ -34,10 +35,9 @@ export class RegisterUserDto {
   readonly email: string;
 
   @ApiProperty({
-    description: 'password for the new account',
+    description: 'your pasword',
     minLength: 8,
     maxLength: 1024,
-    required: true,
   })
   @IsString()
   @IsNotEmpty()
