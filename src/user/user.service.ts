@@ -5,8 +5,7 @@ import { User } from './interface/user.interface';
 import { LoginUserDto, RegisterUserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import { InvariantError } from '../common/exceptions/invariant.error';
-import { AuthenticationError } from "../common/exceptions/authentication.error";
-// import { AuthService } from '../auth/auth.service';
+import { AuthenticationError } from '../common/exceptions/authentication.error';
 
 @Injectable()
 export class UserService {
@@ -55,14 +54,5 @@ export class UserService {
       throw new AuthenticationError('invalid credentials');
     }
     return user;
-  }
-
-  private async checkPassword(reqPass: string, pass: string) {
-    const match = await bcrypt.compare(reqPass, pass);
-    if (!match) {
-      throw new AuthenticationError('invalid credentials');
-    }
-
-    return match;
   }
 }

@@ -1,19 +1,6 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  HttpStatus,
-  Post,
-  Res,
-} from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import {
-  ApiCreatedResponse,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-} from '@nestjs/swagger';
-import { LoginUserDto, RegisterUserDto } from './dto/user.dto';
+import { ApiCreatedResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Response } from 'express';
 import { ClientError } from '../common/exceptions/client.error';
 
@@ -22,7 +9,7 @@ import { ClientError } from '../common/exceptions/client.error';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
+  @Post('register')
   @ApiOperation({})
   @ApiCreatedResponse({})
   async registerUser(
@@ -31,40 +18,45 @@ export class UserController {
   ) {
     try {
       await this.userService.createUser(createUserDto);
-      return res
-        .status(HttpStatus.CREATED)
-        .json(this.sendResponseMessage('success to register new user'));
+      return this.sendResponseMessage(res, 201, 'success to register new user');
     } catch (e) {
       return this.sendErrorMessage(res, e);
     }
   }
 
-  @Post('login')
-  @HttpCode(HttpStatus.OK)
-  @ApiOkResponse()
-  async loginUserByUsernameOrEmail(@Body() loginUserDto: LoginUserDto) {
-    return await this.userService.loginByUsernameOrEmail(loginUserDto);
-  }
-
-  private sendResponseMessage(message: string) {
-    return {
-      status: 'success',
+  private sendResponseMessage(
+    res: Response,
+    code: number,
+    message: string,
+    data?: any,
+  ) {
+    res.status(code);
+    res.json({
+      statusCode: code,
       message: message,
-    };
+      data: data,
+    });
+    return res;
   }
 
   private sendErrorMessage(res: Response, e: Error) {
     if (e instanceof ClientError) {
-      return res.status(e.code).json({
-        status: 'failed',
+      res.status(e.code);
+      res.json({
+        statusCode: e.code,
+        error: e.error,
         message: e.message,
       });
+      return res;
     }
 
     console.error(e);
-    return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      status: 'error',
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR);
+    res.json({
+      statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+      error: 'Internal Server Error',
       message: 'Internal Server Error',
     });
+    return res;
   }
 }

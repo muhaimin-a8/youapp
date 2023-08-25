@@ -3,9 +3,11 @@ import { AppModule } from './app.module';
 import 'dotenv/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { UserModule } from './user/user.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
 
   // swagger
   const options = new DocumentBuilder()
