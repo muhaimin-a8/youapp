@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import 'dotenv/config';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { UserModule } from './user/user.module';
 import { ValidationPipe } from '@nestjs/common';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profiles/profile.module';
+import { SERVER_CONFIG } from './config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -24,8 +24,7 @@ async function bootstrap() {
   });
   SwaggerModule.setup('api', app, docs);
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  console.warn(`server running at port: ${port}`);
+  await app.listen(SERVER_CONFIG.port);
+  console.warn(`server running at port: ${SERVER_CONFIG.port}`);
 }
 bootstrap();

@@ -1,4 +1,15 @@
+import * as process from 'process';
+import 'dotenv/config';
+
 export const JWT_CONFIG = {
-  secretKey: 'SECRET_KEY_JWT',
-  expiration: 600000000,
+  secretKey: process.env.JWT_SECRET,
+  expiration: process.env.JWT_EXPIRATION || 60,
+};
+
+export const MONGO_CONFIG = {
+  uri: process.env.MONGO_URI,
+};
+
+export const SERVER_CONFIG = {
+  port: process.env.PORT || 3000,
 };

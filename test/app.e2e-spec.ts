@@ -21,4 +21,9 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Hello World!');
   });
+  it('/api/users (POST)', () => {
+    // const response = request(
+    //   app.getHttpServer()
+    //     .post('/api/users'))
+  });
 });
